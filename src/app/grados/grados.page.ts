@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GradoService} from '../services/grado.service';
 
 @Component({
   selector: 'app-grados',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GradosPage implements OnInit {
 
-  constructor() { }
+  constructor(private gradosService: GradoService,
+              ) { }
 
   ngOnInit() {
   }
