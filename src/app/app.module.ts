@@ -24,3 +24,4 @@ let SplashScreen;
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+
