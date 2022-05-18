@@ -1,31 +1,44 @@
-import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Grado} from '../models/grado.model';
-import {Observable, Subject} from 'rxjs';
-import {collection, collectionData, docSnapshots} from '@angular/fire/firestore';
-import {map} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import 'firebase/firestore';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Observable} from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class GradoService {
 
-  constructor(private firestore: AngularFirestore) { }
-
-
-  getGrados(): Observable<Grado[]> {
-    //return this.firestore.collection<Grado>('grados').snapshotChanges();
-
-    // @ts-ignore
+  /*gradosCollection;
+  constructor(private firestore: Firestore) {
     const gradosCollection = collection(this.firestore, 'grados');
-    return collectionData(gradosCollection, {idField: 'id'})
+  }*/
+
+  constructor(public firestore: AngularFirestore) {}
+
+  getGradosList(): Observable<Grado[]> {
+    return this.firestore.collection<Grado>(`grados`).valueChanges();
+  }
+
+  getGradoDetail(gradoId: string): Observable<Grado> {
+    return this.firestore.collection('songList').doc<Grado>(gradoId).valueChanges();
+  }
+
+
+
+  /*
+  getGrados(): Observable<Grado[]> {
+    return collectionData(this.gradosCollection, {idField: 'id'})
       .pipe(
         map(grados => grados as Grado[])
       );
   }
+  */
 
 
-  getGradoById(id: string): Observable<Grado> {
+  /*getGradoById(id: string): Observable<Grado> {
     // @ts-ignore
     const document = doc(this.firestore, 'grados/${id}');
     return docSnapshots(document)
@@ -38,6 +51,6 @@ export class GradoService {
           }
         )
       );
-  }
+  }*/
 
 }
