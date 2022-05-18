@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {NavController} from "@ionic/angular";
-import {AuthenticationService} from "../services/authentication.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NavController} from '@ionic/angular';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -16,13 +16,21 @@ export class RegisterPage implements OnInit {
   successMessage = '';
 
   validation_messages = {
+    nombre: [
+      { type: 'required', message: 'Debe introducir un nombre.' },
+      { type: 'minlength', message: 'Tu nombre debe tener un mínimo de 3 caracteres.' }
+    ],
+    apellido: [
+      { type: 'required', message: 'Debe introducir un apellido.' },
+      { type: 'minlength', message: 'Tu apellido debe tener un mínimo de 3 caracteres.' }
+    ],
     email: [
-      { type: 'required', message: 'Email is required.' },
+      { type: 'required', message: 'Debe introducir un email.' },
       { type: 'pattern', message: 'Enter a valid email.' }
     ],
     password: [
-      { type: 'required', message: 'Password is required.' },
-      { type: 'minlength', message: 'Password must be at least 5 characters long.' }
+      { type: 'required', message: 'Debe introducir una contraseña.' },
+      { type: 'minlength', message: 'Tu contraseña debe contener mínimo 5 caracteres.' }
     ]
   };
 
@@ -32,6 +40,14 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.validations_form = this.formBuilder.group({
+      nombre: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+      ])),
+      apellido: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.minLength(3),
+      ])),
       email: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
