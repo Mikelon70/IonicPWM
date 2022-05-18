@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NavController} from '@ionic/angular';
 import {AuthenticationService} from '../services/authentication.service';
-
 
 @Component({
   selector: 'app-login',
@@ -9,13 +9,14 @@ import {AuthenticationService} from '../services/authentication.service';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+
   validations_form: FormGroup;
-  errorMessage = '';
-  // @ts-ignore
-  constructor(private navCtrl: NavController,
-              private authService: AuthenticationService,
-              private formBuilder: FormBuilder) { }
+  errorMessage: string = '';
+
+  constructor(
+    private navCtrl: NavController,
+    private authService: AuthenticationService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.validations_form = this.formBuilder.group({
@@ -29,9 +30,7 @@ export class LoginPage implements OnInit {
       ])),
     });
   }
-
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  validationMessages = {
+  validation_messages = {
     email: [
       { type: 'required', message: 'Email is required.' },
       { type: 'pattern', message: 'Please enter a valid email.' }
@@ -47,7 +46,7 @@ export class LoginPage implements OnInit {
       .then(res => {
         console.log(res);
         this.errorMessage = '';
-        this.navCtrl.navigateForward('/dashboard');
+        this.navCtrl.navigateForward('/perfil');
       }, err => {
         this.errorMessage = err.message;
       });

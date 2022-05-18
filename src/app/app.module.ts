@@ -7,8 +7,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {environment} from '../environments/environment';
-import {AngularFireModule} from "@angular/fire/compat";
-import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
+import {AngularFireModule} from '@angular/fire/compat';
+import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 
 
 @NgModule({
@@ -18,8 +18,6 @@ import {AngularFirestoreModule} from "@angular/fire/compat/firestore";
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    //provideFirebaseApp(() => initializeApp(environment.firebase)),
-    //provideFirestore(() => getFirestore()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule
   ],
