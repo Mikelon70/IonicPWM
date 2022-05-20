@@ -8,37 +8,6 @@
         (ngSubmit)="tryRegister(validations_form.value)">
 
     <ion-item>
-      <ion-label position="floating" color="primary">Nombre</ion-label>
-      <ion-input type="text" formControlName="apellido"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.nombre">
-        <div class="error-message"
-             *ngIf="validations_form.get('nombre').hasError(validation.type)
-              && (validations_form.get('nombre').dirty
-              || validations_form.get('nombre').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-
-    <ion-item>
-      <ion-label position="floating" color="primary">Apellido</ion-label>
-      <ion-input type="text" formControlName="apellido"></ion-input>
-    </ion-item>
-    <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.apellido">
-        <div class="error-message"
-             *ngIf="validations_form.get('apellido').hasError(validation.type)
-&& (validations_form.get('apellido').dirty
-|| validations_form.get('apellido').touched)">
-          {{ validation.message }}
-        </div>
-      </ng-container>
-    </div>
-
-
-    <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>

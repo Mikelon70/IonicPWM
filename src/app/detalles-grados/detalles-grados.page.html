@@ -7,6 +7,11 @@
 <ion-content>
 <ion-list>
   <ion-item><h1>{{grado?.name}}</h1></ion-item>
+  <ion-item>
+    <ion-button (click)="favoritos()">
+      <ion-icon slot="icon-only" name="heart-outline"></ion-icon>
+    </ion-button>
+  </ion-item>
   <ion-item>{{grado?.description}}</ion-item>
   <ion-list>
     <h2>Asignaturas:</h2>
