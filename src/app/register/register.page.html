@@ -6,18 +6,6 @@
 <ion-content class="ion-padding">
   <form class="form" [formGroup]="validations_form"
         (ngSubmit)="tryRegister(validations_form.value)">
-    <ion-item>
-      <ion-label position="floating" color="primary">Nombre</ion-label>
-      <ion-input type="nombre" formControlName="nombre"
-                 class="form-controll" required></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label position="floating" color="primary">Apellido</ion-label>
-      <ion-input type="apellido" formControlName="apellido"
-                 class="form-controll" required></ion-input>
-    </ion-item>
-
 
     <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
