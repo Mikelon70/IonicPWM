@@ -8,8 +8,8 @@ import {AuthenticationService} from '../services/authentication.service';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-  userEmail: string;
 
+  userEmail: string;
 
   constructor(private navCtrl: NavController,
               private authService: AuthenticationService) { }
