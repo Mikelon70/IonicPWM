@@ -14,13 +14,17 @@ export class DetallesGradosPage implements OnInit {
 
   constructor(private gradosService: GradoService,
               private route: ActivatedRoute,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   ngOnInit() {
     const gradoId: string = this.route.snapshot.paramMap.get('id');
     this.gradosService.getGradoDetail(gradoId).subscribe(grado => {
-          this.grado = grado;
+      this.grado = grado;
     });
   }
 
+  favoritos() {
+    //SQLITE
+  };
 }
