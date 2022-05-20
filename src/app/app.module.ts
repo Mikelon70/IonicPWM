@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import {environment} from '../environments/environment';
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
+import { SQLite } from '@ionic-native/sqlite/ngx'; // plugins
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
     AngularFirestoreModule
   ],
   providers: [
+    SQLite,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],
