@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {GradoService} from '../services/grado.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Grado} from '../models/grado.model';
 
 @Component({
   selector: 'app-detalles-grados',
@@ -7,9 +10,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetallesGradosPage implements OnInit {
 
-  constructor() { }
+  public grado: Grado;
+
+  constructor(private gradosService: GradoService,
+              private route: ActivatedRoute,
+              private router: Router) {}
 
   ngOnInit() {
+    const gradoId: string = this.route.snapshot.paramMap.get('id');
+    this.gradosService.getGradoDetail(gradoId).subscribe(grado => {
+          this.grado = grado;
+    });
   }
 
 }

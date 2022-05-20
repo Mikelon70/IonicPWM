@@ -23,7 +23,7 @@ export class GradoService {
   }
 
   getGradoDetail(gradoId: string): Observable<Grado> {
-    return this.firestore.collection('songList').doc<Grado>(gradoId).valueChanges();
+    return this.firestore.collection('grados').doc<Grado>(gradoId).valueChanges();
   }
 
 
