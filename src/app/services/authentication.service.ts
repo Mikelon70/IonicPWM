@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
+import { User } from '../models/user.model';
+import 'firebase/firestore';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  @Input() user!: User;
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth, public firestore: AngularFirestore) { }
 
   registerUser(value) {
     return new Promise<any>((resolve, reject) => {
@@ -40,5 +44,22 @@ export class AuthenticationService {
         });
       }
     });
+  }
+  setName(id: string, name: string){
+    this.firestore.collection('users').doc(id)
+      // eslint-disable-next-line max-len
+      .set({name}).then (r =>{});
+  }
+
+  setEmail(id: string, email: string){
+    this.firestore.collection('users').doc(id)
+      // eslint-disable-next-line max-len
+      .set({email}).then (r =>{});
+  }
+
+  setNameAndEmail(id: string, name: string, email: string) {
+    this.firestore.collection('users').doc(id)
+      // eslint-disable-next-line max-len
+      .set({email: email, name: name}).then (r =>{});
   }
 }

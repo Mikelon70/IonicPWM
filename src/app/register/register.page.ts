@@ -14,7 +14,12 @@ export class RegisterPage implements OnInit {
   validations_form: FormGroup;
   errorMessage = '';
   successMessage = '';
+  id = '';
+  name = '';
+  email = '';
 
+
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   validation_messages = {
     email: [
       { type: 'required', message: 'Debe introducir un email.' },
@@ -23,6 +28,13 @@ export class RegisterPage implements OnInit {
     password: [
       { type: 'required', message: 'Debe introducir una contraseña.' },
       { type: 'minlength', message: 'Tu contraseña debe contener mínimo 5 caracteres.' }
+    ],
+    name: [
+      {type: 'required', message: 'Debe introducir un nombre.'}
+    ],
+    id: [
+      {type: 'required', message: 'Debe introducir un DNI.'},
+      { type: 'pattern', message: 'Enter a valid DNI.' }
     ]
   };
 
@@ -40,6 +52,13 @@ export class RegisterPage implements OnInit {
         Validators.minLength(5),
         Validators.required
       ])),
+      name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+      id: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[0-9]{8}')
+      ])),
     });
   }
 
@@ -49,12 +68,16 @@ export class RegisterPage implements OnInit {
         console.log(res);
         this.errorMessage = '';
         this.successMessage = 'Your account has been created. Please log in.';
+        this.id = this.validations_form.get('id').value;
+        this.email = this.validations_form.get('email').value;
+        this.name = this.validations_form.get('name').value;
+        this.authService.setNameAndEmail(this.id, this.name, this.email);
         this.navCtrl.navigateForward('/perfil');
       }, err => {
         console.log(err);
         this.errorMessage = err.message;
         this.successMessage = '';
-      })
+      });
   }
   goLoginPage() {
     this.navCtrl.navigateBack('');

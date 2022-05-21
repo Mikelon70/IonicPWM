@@ -10,6 +10,7 @@ import {AuthenticationService} from '../services/authentication.service';
 export class PerfilPage implements OnInit {
 
   userEmail: string;
+  name: string;
 
   constructor(private navCtrl: NavController,
               private authService: AuthenticationService) { }
