@@ -42,7 +42,7 @@ export class SqliteCRUDService {
     });
   }
 
-// Create new user
+// Create new degree
   public addGrado(i, n) {
     this.dbInstance.executeSql(`
       INSERT INTO ${this.db_table} (grado_id, name) VALUES ('${i}','${n}')`, [])
@@ -67,7 +67,7 @@ export class SqliteCRUDService {
     });
   }
 
-// Get user by id
+// Get degree by id
   getGrado(id): Promise<any> {
     return this.dbInstance.executeSql(`
       SELECT * FROM ${this.db_table} WHERE grado_id = ?`, [id])
@@ -78,7 +78,7 @@ export class SqliteCRUDService {
         }));
   }
 
-// Delete seleted user
+// Delete seleted degree
   deleteGrado(grado) {
     this.dbInstance.executeSql(`
       DELETE FROM ${this.db_table} WHERE grado_id = ${grado}`, [])

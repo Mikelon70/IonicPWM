@@ -40,6 +40,22 @@
     </div>
 
     <ion-item>
+      <ion-label position="floating" color="primary">Apellidos</ion-label>
+      <ion-input type="text" formControlName="subname"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.subname">
+        <div class="error-message"
+             *ngIf="validations_form.get('subname').hasError(validation.type)
+&& (validations_form.get('subname').dirty
+|| validations_form.get('subname').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-item>
       <ion-label position="floating" color="primary">Email</ion-label>
       <ion-input type="text" formControlName="email"></ion-input>
     </ion-item>

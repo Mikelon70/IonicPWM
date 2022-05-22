@@ -1,9 +1,12 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
     <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" style="height: 200%">
   <ion-grid>
     <ion-row>
       <ion-col text-center>
@@ -11,8 +14,13 @@
       </ion-col>
     </ion-row>
     <ion-row>
+      <ion-img [src]="this.user.img" style="width:15%"></ion-img>
+
       <ion-col text-center>
         Nombre : {{this.user.name}}
+      </ion-col>
+      <ion-col text-center>
+        Apellidos : {{this.user.subname}}
       </ion-col>
       <ion-col text-center>
         Correo : {{userEmail}}
@@ -22,6 +30,57 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+</ion-content>
+<ion-content style="height: 200%">
+  <form class="form" [formGroup]="name_form"
+        (ngSubmit)="changeName(name_form.value)">
+    <ion-item>
+      <ion-label position="floating" color="primary">Nuevo nombre</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages.name">
+        <div class="error-message"
+             *ngIf="name_form.get('name').hasError(validation.type)
+&& (name_form.get('name').dirty
+|| name_form.get('name').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button class="submit-btn" type="submit"
+                [disabled]="!name_form.valid">Cambiar Nombre</ion-button>
+    <label class="error-message">{{errorMessage}}</label>
+    <label class="success-message">{{successMessage}}</label>
+
+  </form>
+  <form class="form" [formGroup]="subname_form"
+        (ngSubmit)="changeSubname(subname_form.value)">
+    <ion-item>
+      <ion-label position="floating" color="primary">Nuevos apellidos</ion-label>
+      <ion-input type="text" formControlName="subname"></ion-input>
+    </ion-item>
+
+    <div class="validation-errors">
+      <ng-container *ngFor="let validation of validation_messages2.subname">
+        <div class="error-message"
+             *ngIf="subname_form.get('subname').hasError(validation.type)
+&& (subname_form.get('subname').dirty
+|| subname_form.get('subname').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+
+    <ion-button class="submit-btn" type="submit"
+                [disabled]="!name_form.valid">Cambiar Apellidos</ion-button>
+    <label class="error-message">{{errorMessage}}</label>
+    <label class="success-message">{{successMessage}}</label>
+
+  </form>
 </ion-content>
 <ion-footer (click)="logout()">
   <ion-toolbar color="secondary">
