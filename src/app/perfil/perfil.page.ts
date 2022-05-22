@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {AuthenticationService} from '../services/authentication.service';
+import {User} from '../models/user.model';
 
 @Component({
   selector: 'app-perfil',
@@ -10,6 +11,7 @@ import {AuthenticationService} from '../services/authentication.service';
 export class PerfilPage implements OnInit {
 
   userEmail: string;
+  user: User;
 
   constructor(private navCtrl: NavController,
               private authService: AuthenticationService) { }
@@ -19,6 +21,9 @@ export class PerfilPage implements OnInit {
       console.log('res', res);
       if (res !== null) {
         this.userEmail = res.email;
+        this.authService.getUserDetail(this.userEmail).subscribe(user => {
+          this.user = user;
+        });
       } else {
         this.navCtrl.navigateBack('');
       }
@@ -26,6 +31,7 @@ export class PerfilPage implements OnInit {
       console.log('err', err);
     });
   }
+
 
   logout() {
     this.authService.logoutUser()
