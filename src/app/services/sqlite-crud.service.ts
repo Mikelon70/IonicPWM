@@ -28,28 +28,28 @@ export class SqliteCRUDService {
         .then((sqLite: SQLiteObject) => {
           sqLite.executeSql(`
             CREATE TABLE IF NOT EXISTS ${this.db_table} (
-              grado_id INTEGER PRIMARY KEY,
-              name varchar(255))`, [] )
-            .then((res) => { alert(JSON.stringify(res)); } )
+              id  INTEGER PRIMARY KEY AUTOINCREMENT,
+              grado_id TEXT,
+              name TEXT)`, [] )
+            .then((res) => { console.log(JSON.stringify(res)); } )
             .catch((error) => alert(JSON.stringify(error)));
           this.dbInstance = sqLite;
-          alert('datatable Database Created!');
         })
         .catch((error) => alert(JSON.stringify(error)));
     });
   }
 
 
-  public addGrado(i, n){
-
+  public addGrado(grado){
     console.log('hola');
     this.dbInstance.executeSql(`
-      INSERT INTO ${this.db_table} (grado_id, name) VALUES (?,?)`,[i,n])
+      INSERT INTO ${this.db_table}(grado_id, name) VALUES ('${grado.id}','${grado.name}')`,[])
       .then(() => {
         alert('Success');
         console.log('hola desde dentro');
-      }, (e) => { alert('error en crear grado: '+JSON.stringify(e.err)); });
+      }, (e) => { alert('error en crear grado: '+JSON.stringify(e)); });
     console.log('adios');
+
   }
 
   getAllGrados() {
@@ -61,6 +61,8 @@ export class SqliteCRUDService {
           this.GRADOS.push(res.rows.item(i));
         }
         return this.GRADOS;
+      }else{
+        console.log('vacio');
       }
     },(e) => {
       alert(JSON.stringify(e));
@@ -81,7 +83,7 @@ export class SqliteCRUDService {
 // Delete seleted user
   deleteGrado(grado) {
     this.dbInstance.executeSql(`
-      DELETE FROM ${this.db_table} WHERE grado_id = ${grado}`, [])
+      DELETE FROM ${this.db_table} WHERE grado_id = '${grado}'`, [])
       .then(() => {
         alert('grado deleted!');
         this.getAllGrados();

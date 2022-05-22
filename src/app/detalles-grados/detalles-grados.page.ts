@@ -27,7 +27,7 @@ export class DetallesGradosPage implements OnInit {
   }
 
   addFavorito(){
-    this.sqliteService.addGrado(this.grado.id, this.grado.name);
+    this.sqliteService.addGrado(this.grado);
   }
 
   /**
