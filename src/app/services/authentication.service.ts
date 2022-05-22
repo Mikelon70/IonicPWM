@@ -3,6 +3,7 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import { User } from '../models/user.model';
 import 'firebase/firestore';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -51,15 +52,14 @@ export class AuthenticationService {
       .set({name}).then (r =>{});
   }
 
-  setEmail(id: string, email: string){
-    this.firestore.collection('users').doc(id)
+  setDniAndName(dni: string, name: string, email: string) {
+    this.firestore.collection('users').doc(email)
       // eslint-disable-next-line max-len
-      .set({email}).then (r =>{});
+      .set({dni: dni, name: name}).then (r =>{});
   }
 
-  setNameAndEmail(id: string, name: string, email: string) {
-    this.firestore.collection('users').doc(id)
-      // eslint-disable-next-line max-len
-      .set({email: email, name: name}).then (r =>{});
+  getUserDetail(email: string): Observable<User> {
+    return this.firestore.collection('users').doc<User>(email).valueChanges();
   }
+
 }

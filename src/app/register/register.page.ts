@@ -14,7 +14,7 @@ export class RegisterPage implements OnInit {
   validations_form: FormGroup;
   errorMessage = '';
   successMessage = '';
-  id = '';
+  dni = '';
   name = '';
   email = '';
 
@@ -32,7 +32,7 @@ export class RegisterPage implements OnInit {
     name: [
       {type: 'required', message: 'Debe introducir un nombre.'}
     ],
-    id: [
+    dni: [
       {type: 'required', message: 'Debe introducir un DNI.'},
       { type: 'pattern', message: 'Enter a valid DNI.' }
     ]
@@ -55,7 +55,7 @@ export class RegisterPage implements OnInit {
       name: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      id: new FormControl('', Validators.compose([
+      dni: new FormControl('', Validators.compose([
         Validators.required,
         Validators.pattern('[0-9]{8}')
       ])),
@@ -68,10 +68,10 @@ export class RegisterPage implements OnInit {
         console.log(res);
         this.errorMessage = '';
         this.successMessage = 'Your account has been created. Please log in.';
-        this.id = this.validations_form.get('id').value;
+        this.dni = this.validations_form.get('dni').value;
         this.email = this.validations_form.get('email').value;
         this.name = this.validations_form.get('name').value;
-        this.authService.setNameAndEmail(this.id, this.name, this.email);
+        this.authService.setDniAndName(this.dni, this.name, this.email);
         this.navCtrl.navigateForward('/perfil');
       }, err => {
         console.log(err);

@@ -1,5 +1,5 @@
 export class User {
-  id?: string;
+  dni?: string;
   email?: string;
   name?: string;
   img?: string;
