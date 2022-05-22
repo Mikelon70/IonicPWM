@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {GradoService} from '../services/grado.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Grado} from '../models/grado.model';
+import {SqliteCRUDService} from '../services/sqlite-crud.service';
 
 @Component({
   selector: 'app-detalles-grados',
@@ -13,6 +14,7 @@ export class DetallesGradosPage implements OnInit {
   public grado: Grado;
 
   constructor(private gradosService: GradoService,
+              private sqliteService: SqliteCRUDService,
               private route: ActivatedRoute,
               private router: Router) {
   }
@@ -24,7 +26,14 @@ export class DetallesGradosPage implements OnInit {
     });
   }
 
-  favoritos() {
-    //SQLITE
-  };
+  addFavorito(){
+    this.sqliteService.addGrado(this.grado.id, this.grado.name);
+  }
+
+  /**
+  removeFavorito(){
+    this.sqliteService.deleteGrado(this.grado.id);
+  }
+   **/
+
 }
