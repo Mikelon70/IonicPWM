@@ -28,10 +28,6 @@ export class GradosPage implements OnInit{
   }
 
   goToFavoritos(){
-    if (this.authService.user){
       this.router.navigate(['/favotitos']);
-    }else{
-      alert('debes inicar sesion para usar los favoritos');
-    }
   }
 }
