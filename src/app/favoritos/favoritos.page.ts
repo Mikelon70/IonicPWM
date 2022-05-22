@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {SqliteCRUDService} from '../services/sqlite-crud.service';
 
 @Component({
   selector: 'app-favoritos',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FavoritosPage implements OnInit {
 
-  constructor() { }
+  favoritos;
+  constructor(private sqliteService: SqliteCRUDService) { }
 
   ngOnInit() {
+    this.getAll();
+  }
+
+  delete(grado){
+    this.sqliteService.deleteGrado(grado);
+    this.getAll();
+  }
+
+  getAll(){
+    this.sqliteService.getAllGrados().then((res) => {
+      this.favoritos=res;
+    });
   }
 
 }
