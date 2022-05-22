@@ -38,6 +38,7 @@ export class PerfilPage implements OnInit {
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
     this.authService.userDetails().subscribe(res => {
       console.log('res', res);
       if (res !== null) {
