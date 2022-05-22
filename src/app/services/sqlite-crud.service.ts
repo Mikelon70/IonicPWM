@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {SQLite, SQLiteObject} from '@ionic-native/sqlite/ngx';
 import {Platform} from '@ionic/angular';
+import {SQLite, SQLiteObject} from '@ionic-native/sqlite/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -13,43 +13,43 @@ export class SqliteCRUDService {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   readonly db_table: string = 'gradosTable';
 
-  private dbInstance: SQLiteObject;
-
   // eslint-disable-next-line @typescript-eslint/member-ordering,@typescript-eslint/naming-convention
   GRADOS: Array <any>;
 
+  private dbInstance: SQLiteObject;
+
   constructor(
     private platform: Platform,
-    private sqlite: SQLite
-  ) {
-    this.databaseConn();
-  }
+    private sqlite: SQLite,
 
-// Create SQLite database
-  databaseConn() {
+  ) {
     this.platform.ready().then(() => {
       this.sqlite.create({name: this.db_name, location: 'default'})
         .then((sqLite: SQLiteObject) => {
-          this.dbInstance = sqLite;
           sqLite.executeSql(`
             CREATE TABLE IF NOT EXISTS ${this.db_table} (
               grado_id INTEGER PRIMARY KEY,
               name varchar(255))`, [] )
             .then((res) => { alert(JSON.stringify(res)); } )
             .catch((error) => alert(JSON.stringify(error)));
+          this.dbInstance = sqLite;
+          alert('datatable Database Created!');
         })
         .catch((error) => alert(JSON.stringify(error)));
     });
   }
 
-// Create new user
-  public addGrado(i, n) {
+
+  public addGrado(i, n){
+
+    console.log('hola');
     this.dbInstance.executeSql(`
-      INSERT INTO ${this.db_table} (grado_id, name) VALUES ('${i}','${n}')`, [])
+      INSERT INTO ${this.db_table} (grado_id, name) VALUES (?,?)`,[i,n])
       .then(() => {
         alert('Success');
-        this.getAllGrados();
-      }, (e) => { alert(JSON.stringify(e.err)); });
+        console.log('hola desde dentro');
+      }, (e) => { alert('error en crear grado: '+JSON.stringify(e.err)); });
+    console.log('adios');
   }
 
   getAllGrados() {
