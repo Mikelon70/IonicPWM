@@ -41,15 +41,15 @@
 
     <ion-item>
       <ion-label position="floating" color="primary">Apellidos</ion-label>
-      <ion-input type="text" formControlName="subname"></ion-input>
+      <ion-input type="text" formControlName="surname"></ion-input>
     </ion-item>
 
     <div class="validation-errors">
-      <ng-container *ngFor="let validation of validation_messages.subname">
+      <ng-container *ngFor="let validation of validation_messages.surname">
         <div class="error-message"
-             *ngIf="validations_form.get('subname').hasError(validation.type)
-&& (validations_form.get('subname').dirty
-|| validations_form.get('subname').touched)">
+             *ngIf="validations_form.get('surname').hasError(validation.type)
+&& (validations_form.get('surname').dirty
+|| validations_form.get('surname').touched)">
           {{ validation.message }}
         </div>
       </ng-container>
@@ -74,7 +74,7 @@
     <ion-item>
       <ion-label position="floating" color="primary">Password</ion-label>
       <ion-input type="password" formControlName="password"
-                 class="form-controll" required></ion-input>
+                 class="form-control" required></ion-input>
     </ion-item>
     <div class="validation-errors">
       <ng-container *ngFor="let validation of validation_messages.password">

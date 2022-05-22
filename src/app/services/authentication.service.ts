@@ -47,17 +47,17 @@ export class AuthenticationService {
     });
   }
   setName(_email: any, _name: string) {
-    this.firestore.collection('users').doc(_email).set({name:_name}).then(r => {});
+    this.firestore.collection('users').doc(_email).update({name:_name}).then(r => {});
   }
 
-  setSubname(_email: any, _subname: string) {
-    this.firestore.collection('users').doc(_email).set({subname:_subname}).then(r => {});
+  setSurname(_email: any, _surname: string) {
+    this.firestore.collection('users').doc(_email).update({surname:_surname}).then(r => {});
   }
 
-  addNewUser(_dni: string, _name: string, _subname: string, _email: string) {
+  addNewUser(_dni: string, _name: string, _surname: string, _email: string) {
     this.firestore.collection('users').doc(_email)
       // eslint-disable-next-line max-len
-      .set({dni: _dni, name: _name, subname: _subname, img:'https://firebasestorage.googleapis.com/v0/b/pruebafirebase-3d1a3.appspot.com/o/fotoAlumno.png?alt=media&token=620650c8-0457-4214-9521-ed73c62f9d6a'}).then (r =>{});
+      .set({dni: _dni, name: _name, surname: _surname, img:'https://firebasestorage.googleapis.com/v0/b/pruebafirebase-3d1a3.appspot.com/o/fotoAlumno.png?alt=media&token=620650c8-0457-4214-9521-ed73c62f9d6a'}).then (r =>{});
   }
 
   getUserDetail(email: string): Observable<User> {

@@ -16,7 +16,7 @@ export class RegisterPage implements OnInit {
   successMessage = '';
   dni = '';
   name = '';
-  subname = '';
+  surname = '';
   email = '';
 
 
@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
     name: [
       {type: 'required', message: 'Debe introducir un nombre.'}
     ],
-    subname: [
+    surname: [
       {type: 'required', message: 'Debe introducir un apellido.'}
     ],
     dni: [
@@ -59,7 +59,7 @@ export class RegisterPage implements OnInit {
       name: new FormControl('', Validators.compose([
         Validators.required
       ])),
-      subname: new FormControl('', Validators.compose([
+      surname: new FormControl('', Validators.compose([
         Validators.required
       ])),
       dni: new FormControl('', Validators.compose([
@@ -78,8 +78,8 @@ export class RegisterPage implements OnInit {
         this.dni = this.validations_form.get('dni').value;
         this.email = this.validations_form.get('email').value;
         this.name = this.validations_form.get('name').value;
-        this.subname = this.validations_form.get('subname').value;
-        this.authService.addNewUser(this.dni, this.name, this.subname, this.email);
+        this.surname = this.validations_form.get('surname').value;
+        this.authService.addNewUser(this.dni, this.name, this.surname, this.email);
         this.navCtrl.navigateForward('/perfil');
       }, err => {
         console.log(err);

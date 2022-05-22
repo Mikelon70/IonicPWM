@@ -2,6 +2,6 @@ export class User {
   dni?: string;
   email?: string;
   name?: string;
-  subname?: string;
+  surname?: string;
   img?: string;
 }

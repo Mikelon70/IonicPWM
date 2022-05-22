@@ -1,12 +1,14 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Grados ofertados</ion-title>
+    <ion-button href="login">Login</ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let grado of grados" routerLink="/detalles-grados/{{grado.id}}">
+      <ion-img [src]="grado.img" style="width: 10%"></ion-img>
       <h2>{{grado.name}}</h2>
     </ion-item>
   </ion-list>
