@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {NavController} from '@ionic/angular';
 import {AuthenticationService} from '../services/authentication.service';
 import {User} from '../models/user.model';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-perfil',
@@ -10,11 +11,31 @@ import {User} from '../models/user.model';
 })
 export class PerfilPage implements OnInit {
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  name_form: FormGroup;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  subname_form: FormGroup;
+  errorMessage = '';
+  successMessage = '';
   userEmail: string;
   user: User;
 
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  validation_messages = {
+    name: [
+      {type: 'required', message: 'Debe introducir un nombre.'}
+    ]
+  };
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  validation_messages2 = {
+    subname: [
+      {type: 'required', message: 'Debe introducir un apellido.'}
+    ]
+  };
+
   constructor(private navCtrl: NavController,
-              private authService: AuthenticationService) { }
+              private authService: AuthenticationService,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.authService.userDetails().subscribe(res => {
@@ -30,6 +51,24 @@ export class PerfilPage implements OnInit {
     }, err => {
       console.log('err', err);
     });
+    this.name_form = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+    });
+    this.subname_form = this.formBuilder.group({
+      subname: new FormControl('', Validators.compose([
+        Validators.required
+      ])),
+    });
+  }
+
+  changeName(value) {
+    this.authService.setName(this.user.email,value);
+  }
+
+  changeSubname(value){
+    this.authService.setSubname(this.user.email,value);
   }
 
 
@@ -37,7 +76,7 @@ export class PerfilPage implements OnInit {
     this.authService.logoutUser()
       .then(res => {
         console.log(res);
-        this.navCtrl.navigateBack('');
+        this.navCtrl.navigateForward('/home');
       })
       .catch(error => {
         console.log(error);
